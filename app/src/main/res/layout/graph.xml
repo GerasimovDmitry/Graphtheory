@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".GraphActivity">
+    <LinearLayout
+        android:id="@+id/layoutMenu"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/buttonMatrix"
+            style="@style/RoundedCornerButton"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonMatrix"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonGraph"
+            style="@style/RoundedCornerButton"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonGraph"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonAlg"
+            style="@style/RoundedCornerButton"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonAlg"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonLibrary"
+            style="@style/RoundedCornerButton"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/lib"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:translationZ="5dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/layoutMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="8dp">
+
+        <com.example.gerasimov.graphtheory.GraphView
+            android:id="@+id/ImageGraph"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:scaleType="center"></com.example.gerasimov.graphtheory.GraphView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

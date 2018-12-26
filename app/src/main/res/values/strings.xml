@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Graph theory</string>
+    <string name="buttonMatrix">Matrix</string>
+    <string name="buttonAlg">Algorithms</string>
+    <string name="buttonGraph">Graph</string>
+    <string name="textViewMain">| Nodes </string>
+    <string name="clear">Clear</string>
+    <string name="start">start algorithm</string>
+    <string name="finish_node">Finish node</string>
+    <string name="start_node">Start node</string>
+
+</resources>

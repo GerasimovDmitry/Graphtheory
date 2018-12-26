@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Main">
+
+    <LinearLayout
+        android:id="@+id/layoutMenu"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/buttonMatrix"
+            style="@style/RoundedCornerButton"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonMatrix"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonGraph"
+            style="@style/RoundedCornerButton"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonGraph"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonAlg"
+            style="@style/RoundedCornerButton"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_weight="3"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:text="@string/buttonAlg"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/buttonLibrary"
+            style="@style/RoundedCornerButton"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/lib"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:translationZ="5dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutMenu">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/textViewMain"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:typeface="sans" />
+
+        <Spinner
+            android:id="@+id/spinnerNodes"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp" />
+
+        <Spinner
+            android:id="@+id/spinnerMatrix"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="0" />
+
+        <Button
+            android:id="@+id/buttonClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/clear"
+            style="@style/RoundedCornerButton"
+            android:elevation="5dp"
+            android:stateListAnimator="@animator/button_elevation"
+            android:textSize="12sp"
+            android:translationZ="5dp"
+            android:typeface="normal" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="false"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        </HorizontalScrollView>
+    </ScrollView>
+
+
+
+</android.support.constraint.ConstraintLayout>
