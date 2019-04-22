@@ -103,12 +103,15 @@ public class AlgActivity extends AppCompatActivity {
         };
         buttonGraph.setOnClickListener(oclbuttonGraph);
 
-        //activity ALG
+        //activity MAIN
         View.OnClickListener oclbuttonMatrix = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(AlgActivity.this, Main.class);
-                startActivity(intent2);
+              //  Intent intent2 = new Intent(AlgActivity.this, Main.class);
+                //startActivity(intent2);
+                Intent intent = new Intent(AlgActivity.this, Main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         };
         buttonMatrix.setOnClickListener(oclbuttonMatrix);

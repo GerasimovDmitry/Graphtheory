@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayout;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ public class Main extends AppCompatActivity {
     Spinner spinnerNodes;
     Button buttonClear, buttonAlg, buttonGraph, buttonLibrary;
     static int countNodes = 2;
+    static boolean digraph;
     static EditText[][] nums;
     static int [][] matrixNums;
 
@@ -34,7 +36,9 @@ public class Main extends AppCompatActivity {
                     matrixNums[i][j] = 0;
                 }
                 else{
-                    matrixNums[i][j] = Integer.valueOf(nums[i][j].getText().toString());
+                    if (digraph)matrixNums[i][j] = Integer.valueOf(nums[i][j].getText().toString());
+                    else if(i > j) matrixNums[i][j] = matrixNums[j][i];
+                         else matrixNums[i][j] = Integer.valueOf(nums[i][j].getText().toString());
                 }
             }
         }
@@ -83,6 +87,7 @@ public class Main extends AppCompatActivity {
 
                 EditText a = new EditText(this);
                 a.setText(Integer.toString(0));
+                a.setInputType(InputType.TYPE_CLASS_NUMBER);
                 matrix.addView(a);
                     if(i >= 1 && j >= 1){
                         nums[i-1][j-1] = a;
@@ -137,6 +142,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                digraph = "Digraph".equals(parent.getItemAtPosition(position).toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -156,7 +162,7 @@ public class Main extends AppCompatActivity {
         View.OnClickListener oclbuttonClear = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                printMatrix(3);
+                printMatrix(2);
                 spinnerNodes.setSelection(0);
             }
         };

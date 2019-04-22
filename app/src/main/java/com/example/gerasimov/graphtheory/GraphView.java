@@ -60,17 +60,33 @@ public class GraphView extends android.support.v7.widget.AppCompatImageView {
 
             for(int i = 0; i < countNodes; i++){
                 for(int j = 0; j < countNodes; j++){
-                    if(matrix[i][j] != 0 ){
-                        canvas.drawLine(nodes[i][0], nodes[i][1], nodes[j][0], nodes[j][1], paint);
+                    if(matrix[i][j] != 0 ) {
+                        if (Main.digraph) {
+                            float beta = (float) Math.atan2(nodes[j][1] - nodes[i][1], nodes[j][0] - nodes[i][0]);
+                            float alfa = (float) Math.PI / 6;
+                            float a = (float) (55 * Math.sin(beta));
+                            float b = (float) (55 * Math.cos(beta));
+                            int lengthArrow = 50;
+                            nodes[i][0] += b;
+                            nodes[i][1] += a;
+                            nodes[j][0] -= b;
+                            nodes[j][1] -= a;
+                            float x2 = (float) (nodes[j][0] - lengthArrow * Math.cos(alfa + beta));//draw arrows
+                            float y2 = (float) (nodes[j][1] - lengthArrow * Math.sin(alfa + beta));
+                            canvas.drawLine(x2, y2, nodes[j][0], nodes[j][1], paint);
+                            x2 = (float) (nodes[j][0] - lengthArrow * Math.cos(alfa - beta));
+                            y2 = (float) (nodes[j][1] + lengthArrow * Math.sin(alfa - beta));
+                            canvas.drawLine(x2, y2, nodes[j][0], nodes[j][1], paint);
+                            canvas.drawLine(nodes[i][0], nodes[i][1], nodes[j][0], nodes[j][1], paint);
+                            nodes[i][0] -= b;
+                            nodes[i][1] -= a;
+                            nodes[j][0] += b;
+                            nodes[j][1] += a;
+                        }
+                        else canvas.drawLine(nodes[i][0], nodes[i][1], nodes[j][0], nodes[j][1], paint);
                     }
                 }
             }
-            /*for(int i = 0; i < countNodes - 1; i++){
-                canvas.drawLine(nodes[i][0], nodes[i][1], nodes[i+1][0], nodes[i+1][1], paint);
-            }*/
-            //canvas.drawLine(nodes[0][0], nodes[0][1], nodes[2][0], nodes[2][1], paint);
-            //canvas.drawLine(nodes[2][0], nodes[2][1], nodes[4][0], nodes[4][1], paint);
-            //canvas.drawLine(nodes[5][0], nodes[5][1], nodes[7][0], nodes[7][1], paint);
 
             for(int i = 0; i< countNodes; i++) {
                 paint.setColor(Color.parseColor("#2563ba"));

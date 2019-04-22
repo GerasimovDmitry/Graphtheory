@@ -26,8 +26,11 @@ public class GraphActivity extends AppCompatActivity {
         View.OnClickListener oclbuttonMatrix = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(GraphActivity.this, Main.class);
-                startActivity(intent2);
+                //Intent intent2 = new Intent(GraphActivity.this, Main.class);
+                //startActivity(intent2);
+                Intent intent = new Intent(GraphActivity.this, Main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         };
         buttonMatrix.setOnClickListener(oclbuttonMatrix);
