@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".GraphActivity" />
         <activity android:name=".AlgActivity" />
+        <activity android:name=".TermActivity" />
         <activity android:name=".LibActivity"></activity>
     </application>
 

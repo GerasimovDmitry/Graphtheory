@@ -1,73 +1,72 @@
 package com.example.gerasimov.graphtheory;
 
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class LibActivity extends AppCompatActivity {
 
-    String[] items;
-    ArrayList<String> listItems;
-    ArrayAdapter<String> adapter;
-    ListView listView;
-    TextView editText;
+    private ListView termRepositoryList;
+    ArrayAdapter<TermRepository> arrayAdapter;
+    DatabaseHelper sqlHelper;
+    Button buttonAdd;
+    EditText editText;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_actvity);
-        listView=(ListView)findViewById(R.id.listview);
-        editText=(EditText)findViewById(R.id.txtsearch);
-        initList();
 
-        editText.addTextChangedListener(new TextWatcher() {
-
+        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        View.OnClickListener oclbuttonGraph = new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                Intent intent = new Intent(LibActivity.this, TermActivity.class);
+                startActivity(intent);
             }
+        };
+        buttonAdd.setOnClickListener(oclbuttonGraph);
 
+        sqlHelper = new DatabaseHelper(getApplicationContext());
+        // создаем базу данных
+        sqlHelper.create_db();
+
+        termRepositoryList = (ListView) findViewById(R.id.list);
+
+        termRepositoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().equals("")){
-                    // reset listview
-                    initList();
-                } else {
-                    // perform search
-                    searchItem(s.toString());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TermRepository termRepository = arrayAdapter.getItem(position);
+                if (termRepository != null) {
+                    Intent intent = new Intent(getApplicationContext(), TermActivity.class);
+                    intent.putExtra("id", termRepository.getId());
+                    intent.putExtra("click", 25);
+                    startActivity(intent);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
         });
-
     }
 
-    public void searchItem(String textToSearch){
-        for(String item:items){
-            String a = new String(item.toLowerCase());
-            if(!a.contains(textToSearch.toLowerCase())){
-                listItems.remove(item);
-            }
-        }
-        adapter.notifyDataSetChanged();
-    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        DatabaseAdapter adapter = new DatabaseAdapter(this);
+        adapter.open();
 
-    public void initList(){
-        items=new String[]{"Java","JavaScript","C#","PHP", "С++", "Python", "C", "SQL", "Ruby", "Objective-C"};
-        listItems=new ArrayList<>(Arrays.asList(items));
-        adapter=new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
-        listView.setAdapter(adapter);
-    }
+        List<TermRepository> terms = adapter.getTerms();
 
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, terms);
+        termRepositoryList.setAdapter(arrayAdapter);
+        adapter.close();
+        // sqlHelper.close();
+    }
+    // по нажатию на кнопку запускаем TermActivity для добавления данных
 }

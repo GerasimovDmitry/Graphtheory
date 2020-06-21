@@ -8,12 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class AlgActivity extends AppCompatActivity {
     Spinner spinnerAlg, spinnerS, spinnerF;
-    Button buttonAlg, buttonGraph, buttonLibrary, buttonMatrix;
-    String[] dataNodes = {"1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
-    String[] dataAlg = {"BFS", "DFS", "Floyd", "Dijkstra", "etc."};
+    Button buttonAlg, buttonGraph, buttonLibrary, buttonMatrix, buttonStart;
+    TextView textResult;
+    String[] dataNodes = {"1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
+    String[] dataAlg = {"DFS", "Floyd", "Dijkstra", "etc."};
+    String choice;
+    int startNode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,7 @@ public class AlgActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                choice = parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -48,7 +53,7 @@ public class AlgActivity extends AppCompatActivity {
         spinnerS = (Spinner) findViewById(R.id.spinnerS);
         spinnerS.setAdapter(adapter2);
         // заголовок
-        spinnerS.setPrompt("BFS");
+        spinnerS.setPrompt("DFS");
         // выделяем элемент
         spinnerS.setSelection(0);
         // устанавливаем обработчик нажатия
@@ -57,6 +62,7 @@ public class AlgActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                startNode = Integer.parseInt(parent.getItemAtPosition(position).toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -90,8 +96,42 @@ public class AlgActivity extends AppCompatActivity {
         buttonMatrix = (Button) findViewById(R.id.buttonMatrix);
         buttonGraph = (Button) findViewById(R.id.buttonGraph);
         buttonLibrary = (Button) findViewById(R.id.buttonLibrary);
+        buttonStart = (Button) findViewById(R.id.buttonStart);
 
-
+        View.OnClickListener oclbuttonStart = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Аlgorithms.setMatrix();
+                textResult = (TextView) findViewById(R.id.textViewResult);
+                Аlgorithms.n = Main.countNodes;
+                if(choice.equals("DFS")){
+                    int k = Аlgorithms.components();
+                    String result =  new StringBuilder().append("Components = ").append(k).append('\n').toString();
+                    for(int i = 0; i < k; i++){
+                        result = new StringBuilder().append(Аlgorithms.components[i]).append(result).toString();
+                    }
+                }
+                if(choice.equals("Floyd")) {
+                    int [][] a = Аlgorithms.floyd();
+                    String result = "";
+                    for(int i = 0; i < Main.countNodes; i++){
+                        for(int j = 0; j < Main.countNodes; j++ )
+                            result =  new StringBuilder().append(result).append(" ").append(a[i][j]).toString();
+                        result = new StringBuilder().append(result).append('\n').toString();
+                    }
+                    textResult.setText(result);
+                }
+                if(choice.equals("Dijkstra")) {
+                    int [] a = Аlgorithms.dijkstra(startNode);
+                    String result = "";
+                    for(int i = 0; i < Main.countNodes; i++){
+                            result =  new StringBuilder().append(result).append(" ").append(a[i]).toString();
+                    }
+                    textResult.setText(result);
+                }
+                }
+        };
+        buttonStart.setOnClickListener(oclbuttonStart);
 
         //activity GRAPH
         View.OnClickListener oclbuttonGraph = new View.OnClickListener() {

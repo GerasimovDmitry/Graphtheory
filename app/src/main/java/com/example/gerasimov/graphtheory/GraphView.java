@@ -77,7 +77,7 @@ public class GraphView extends android.support.v7.widget.AppCompatImageView {
                             x2 = (float) (nodes[j][0] - lengthArrow * Math.cos(alfa - beta));
                             y2 = (float) (nodes[j][1] + lengthArrow * Math.sin(alfa - beta));
                             canvas.drawLine(x2, y2, nodes[j][0], nodes[j][1], paint);
-                            canvas.drawLine(nodes[i][0], nodes[i][1], nodes[j][0], nodes[j][1], paint);
+                            canvas.drawLine(nodes[i][0], nodes[i][1], nodes[j][0], nodes[j][1], paint); // draw edge
                             nodes[i][0] -= b;
                             nodes[i][1] -= a;
                             nodes[j][0] += b;
